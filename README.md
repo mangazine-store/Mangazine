@@ -24,7 +24,7 @@
   <a href="#requirements">Requirements</a> •
   <a href="#how-to-use">How To Use</a> •
   <a href="#license">License</a> •
-  <a href="#contact-me">Contact me</a>
+  <a href="#contact-us">Contact us</a>
 </p>
 
 <!-- GIF HERE -->
