@@ -1,0 +1,105 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id        Int       @id @default(autoincrement())
+  name      String
+  cpf       String    @unique
+  email     String    @unique
+  avatarUrl String
+  password  String
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @default(now()) @updatedAt
+  adresses  Address[]
+  orders    Order[]
+
+  @@map("users")
+}
+
+model Address {
+  id        Int      @id @default(autoincrement())
+  zipCode   String
+  street    String
+  number    String
+  city      String
+  country   String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @default(now()) @updatedAt
+  userId    Int
+  User      User     @relation(fields: [userId], references: [id])
+
+  @@map("addresses")
+}
+
+model Order {
+  id        Int              @id @default(autoincrement())
+  status    OrderStatus
+  createdAt DateTime         @default(now())
+  updatedAt DateTime         @default(now()) @updatedAt
+  userId    Int
+  User      User             @relation(fields: [userId], references: [id])
+  products  ProductOnOrder[]
+
+  @@map("orders")
+}
+
+model ProductOnOrder {
+  amount    Int
+  createdAt DateTime @default(now())
+  updatedAt DateTime @default(now()) @updatedAt
+  orderId   Int
+  productId Int
+  Order     Order    @relation(fields: [orderId], references: [id])
+  Product   Product  @relation(fields: [productId], references: [id])
+
+  @@id([orderId, productId])
+  @@map("productsOrders")
+}
+
+model Product {
+  id          Int              @id @default(autoincrement())
+  name        String           @unique
+  author      String
+  description String
+  image       String
+  inStock     Int
+  price       Decimal
+  rating      Int
+  createdAt   DateTime         @default(now())
+  updatedAt   DateTime         @default(now()) @updatedAt
+  orders      ProductOnOrder[]
+  genres      GenreOnProduct[]
+
+  @@map("products")
+}
+
+model GenreOnProduct {
+  Product   Product @relation(fields: [productId], references: [id])
+  productId Int
+  Genre     Genre   @relation(fields: [genreId], references: [genreCode])
+  genreId   Int
+
+  @@id([productId, genreId])
+  @@map("productsGenres")
+}
+
+model Genre {
+  id        Int              @id @default(autoincrement())
+  genreCode Int              @unique
+  name      String           @unique
+  createdAt DateTime         @default(now())
+  products  GenreOnProduct[]
+
+  @@map("genres")
+}
+
+enum OrderStatus {
+  PAID
+  RESERVED
+}
