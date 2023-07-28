@@ -61,3 +61,10 @@ $ docker compose up -d
 > GitHub [@apocsenpai](https://github.com/apocsenpai) &nbsp;&middot;&nbsp;
 > Email [sennasjonatas@gmail.com](mailto:sennasjonatas@gmail.com) &nbsp;&middot;&nbsp;
 > Linkedin [Jonatas Sennas](https://www.linkedin.com/in/jonatassennas/)
+
+
+><h3>Leonan Martins</h3>
+>
+> GitHub [@leonanm03](https://github.com/leonanm03) &nbsp;&middot;&nbsp;
+> Email [leonanm04@gmail.com](mailto:leonanm04@gmail.com) &nbsp;&middot;&nbsp;
+> Linkedin [Leonan Martins](https://www.linkedin.com/in/leonan-martins/)
